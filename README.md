@@ -48,3 +48,9 @@ Configuration is possible through .yml files:
 + *rest.url*: determines the url of the REST API of the blockchain client
 + *jsonrpc*: configuration of the JSON-RPC API of the blockchain client. Not all clients provide a full REST API, so some data may need to be extracted using the old api.
 + *logging*: configuration of log-levels and logfiles
+
+## Vagrant
+For testing purposes a Vagrant VM build script is provided in the ```server``` folder. 
+Requirements: 
++ Oracle Virtual Box 5.x (or Parallels on Mac)
++ Vagrant
