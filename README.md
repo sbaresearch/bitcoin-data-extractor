@@ -34,6 +34,17 @@ Configuration is possible through .yml files:
 + spring.jpa - OR Mapping configuration (change jpa.properties.hibernate.dialect to the database you want to use. Currently: PostgreSQL 9.x)
 + server.port - Port the server is tomcat started on (necessary for REST API)
 + chain:
-++ a
+ + firstBlockHash: (SHA256) Blockhash - hash of the first block to be extracted. For new runs set to genesisBlock. Otherwise, set this to the blockhash of the last extracted block, in order to update an existing database.
+ + firstBlockHeight: int - height of the first block to be extracted. For new runs set to 0. If you want to update an existing database, simply set this to the max. blockheight of the previously extracted data
+ + genesisBlock: (SHA256) Blockhash - hash of the genesis block of the blockchain
+ + blockQuerySize: int - amout of blocks extracted with each call to the blockchain client. *Recommended: 1000*. Attention: too large block query size will lead to a timeout of most blockchain client. 
+ + testRun: true|false - a test run will simply try to extract the first 10 blocks of the chain
+ + runId: - -1 to continue last run, or specify specific run to resume it
+ + newRun: true|false - determines whether this is a new run, or an update of an existing database
+ + lightRun: false|false - Enable/Disable extraction of ALL transactions. Attention: extracting all transactions will lead to a very large database size (~ 3-4 times the size of the original blockchain)
+ + extractNames: true|false - only used in Namecoin. Activates extraction of Namecoin names
 
-
++ email: allows to configure email notifications on termination (success / error)
++ rest.url: determines the url of the REST API of the blockchain client
++ jsonrpc: configuration of the JSON-RPC API of the blockchain client. Not all clients provide a full REST API, so some data may need to be extracted using the old api.
++ logging: configuration of log-levels and logfiles
