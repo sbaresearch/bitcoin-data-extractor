@@ -12,7 +12,7 @@ A tool for extracting data from Bitcoin-like blockchains into a relational model
 
 1. Clone this repository
 2. In the parent folder, run ``` mvn clean install ```. This will download and build all necessary modules. Requires internet access!
-3. Configure the profile you want to use (see #configuration)
+3. Configure the profile you want to use (see [configuration](#configuration))
 4. Execute ``` mvn spring-boot:run -Drun.profiles=<your profile> ```
 
 Depending on the configuration and the size of the chosen blockchain, the initial data extraction process can take up to 96 hours (or longer).
