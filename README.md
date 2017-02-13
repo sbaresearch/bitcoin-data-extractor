@@ -19,7 +19,7 @@ Depending on the configuration and the size of the chosen blockchain, the initia
 The tool provides a performance monitoring, which will output information on operation duration (blockchain client queries and persistence operations) to stdout. 
 Termination will happen automatically after sucessfull extraction or in case of an error (e.g. blockchain client dies). 
 
-An email notification can be sent to your email address, if your server provides a mail server (see ...)
+An email notification can be sent to your email address, if your server provides a mail server (see [configuration](#configuration))
 
 ## Configuration
 Currently supported profiles: 
