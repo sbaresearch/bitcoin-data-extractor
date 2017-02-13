@@ -29,4 +29,11 @@ Currently supported profiles:
 + Litecoin - ```ltc```
 + Dogecoin - ```doge```
 
+Configuration is possible through .yml files:
++ spring.datasource - database information
++ spring.jpa - OR Mapping configuration (change jpa.properties.hibernate.dialect to the database you want to use. Currently: PostgreSQL 9.x)
++ server.port - Port the server is tomcat started on (necessary for REST API)
++ chain:
+++ a
+
 
