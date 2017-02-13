@@ -1,0 +1,57 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/unoanalyzer
+    username: uno
+    password: fd44887907ddcccab8c617651e5dbdaf34ff1af0e0996766de95eee382633a94
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+server.port: 8002
+
+chain:
+  firstBlockHash: 00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d
+  firstBlockHeight: 0
+  genesisBlock: 00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d
+  blockQuerySize: 1000
+  testRun: false
+  newRun: false
+  runId: -1
+  lightRun: true
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: uno.analyzer@sba-research.org
+  subject: Unobtanium Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender:  	UnobtaniumAnalyzer
+  sendMail: true
+
+rest:
+  url: http://localhost:6662/rest
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 6662
+  rpcuser: emercoinrpc
+  rpcpassword: BmeQgUxa3LCAHc1hL72qfLwLotU5GLcE9NEkNycZgvqJ
+
+
+logging:
+  path: /var/log
+  file: emer.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR

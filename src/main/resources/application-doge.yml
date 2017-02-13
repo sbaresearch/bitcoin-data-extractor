@@ -1,0 +1,57 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dogeanalyzer
+    username: doge
+    password: a93cd69cc046ea649ff2b2c7ab0c35e326350128fa4a626464dd31de4193fb56
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+server.port: 8001
+
+chain:
+  firstBlockHash: 7a1cff5e791c225c7c7c8bfce367819c0b5caf7864a79ae025eb545ef5f1ac52
+  firstBlockHeight: 1448488
+  genesisBlock: 1a91e3dace36e2be3bf030a65679fe821aa1d6ef92e7c9902eb318182c355691
+  blockQuerySize: 1000
+  testRun: false
+  newRun: false
+  runId: -1
+  lightRun: true
+  hexheaders: true
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: dogecoin.analyzer@sba-research.org
+  subject: Dogecoin Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender: DogecoinAnalyzer
+  sendMail: true
+
+rest:
+  url: http://localhost:22555/rest
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 22555
+  rpcuser: dogecoinrpc
+  rpcpassword: 79ZMeSN4pw6oMi9jFZQM5nc2ADDXJh4eRAmJgTqZ692
+
+logging:
+  path: /var/log
+  file: doge.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR

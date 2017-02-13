@@ -1,0 +1,57 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ltcanalyzer
+    username: ltc
+    password: fd44887907ddcccab8c617651e5dbdaf34ff1af0e0996766de95eee382633a94
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+server.port: 8002
+
+chain:
+  firstBlockHash: 499505b6fa358c76072947acb632b84eeb8f9c8e5bea879d1e8df7b0cc9f09d0
+  firstBlockHeight: 1090376
+  genesisBlock: 12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2
+  blockQuerySize: 1000
+  testRun: false
+  newRun: false
+  runId: -1
+  lightRun: true
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: bitcoin.analyzer@sba-research.org
+  subject: Litecoin Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender: LitecoinAnalyzer
+  sendMail: true
+
+rest:
+  url: http://localhost:9332/rest
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 9332
+  rpcuser: litecoinrpc
+  rpcpassword: J9jBqdcEWQVdME7JRJ9VWRxD5pgF2yq5yGHXmk1Aocbm
+
+
+logging:
+  path: /var/log
+  file: ltc.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR

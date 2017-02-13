@@ -1,0 +1,58 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ncanalyzer
+    username: nmc
+    password: d76827e837f1b94e4ba538666252cd18101f90b56b4f49890587bb86509433c2
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+server.port: 8003
+
+chain:
+  firstBlockHash: 4d0b3e38183cc62aae27dd5677cb0155070f3f15edb837874c9615b006b34589
+  firstBlockHeight: 298327
+  genesisBlock: 000000000062b72c5e2ceb45fbc8587e807c155b0da735e6483dfba2f0a9c770
+  blockQuerySize: 1000
+  testRun: false
+  runId: -1 # -1 to continue last run, or specify specific run to resume it
+  newRun: false
+  lightRun: false
+  extractNames: true
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: namecoin.analyzer@sba-research.org
+  subject: Namecoin Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender: NamecoinAnalyzer
+  sendMail: true
+
+rest:
+    url: http://localhost:8336/rest
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 8336
+  rpcuser: alexei
+  rpcpassword: bf838cdf1288cc64aeeb219672635f7f220ab460da16e68b6b26a19634cd
+
+logging:
+  path: /var/log
+  file: nmc.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR
+
