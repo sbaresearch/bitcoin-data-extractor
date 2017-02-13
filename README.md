@@ -54,3 +54,15 @@ For testing purposes a Vagrant VM build script is provided in the ```server``` f
 Requirements: 
 + Oracle Virtual Box 5.x (or Parallels on Mac)
 + Vagrant
+
+After intalling the necessary software, run ```vagrant up``` in ther server folder. 
+
+As a result, a VM with a PostrgeSQL 9.3 database server running on standard port 5432 will be provisioned. 
+You can access the VM by calling ```vagrant ssh``` in the server folder. 
+
+To configure the VM please check the Vagrantfile 
+For database configurations (*necessary!!!*) please check the the bootstrap.sh file in the Vagrant-Setup folder. 
+
+Destory the VM - ```vagrant destroy```
+Shutdonw VM - ```vagrant halt```
+
