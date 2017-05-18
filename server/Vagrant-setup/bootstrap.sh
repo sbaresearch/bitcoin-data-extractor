@@ -109,3 +109,9 @@ date > "$PROVISIONED_ON"
 echo "Successfully created PostgreSQL dev virtual machine."
 echo ""
 print_db_usage
+
+CREATE DATABASE myriad WITH OWNER=myriad
+                                  LC_COLLATE='en_US.utf8'
+                                  LC_CTYPE='en_US.utf8'
+                                  ENCODING='UTF8'
+                                  TEMPLATE=template0;

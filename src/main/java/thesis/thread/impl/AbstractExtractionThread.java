@@ -148,9 +148,8 @@ public class AbstractExtractionThread implements ExtractionService {
                 blockhash = blockhashes.get(blockhashes.size() - 1).getHash();
                 blockHeight += blockQuerySize;
 
-                int latest = blockhashes.get(blockhashes.size() - 1).getHeight();
-                double percent = (double) Math.round((latest / (double) currentBlockHeight * 100) * 100) / 100;
-                logger.info("Block " + latest + " - " + percent + "%");
+                double percent = (double) Math.round((blockHeight / (double) currentBlockHeight * 100) * 100) / 100;
+                logger.info("Block " + blockHeight + " - " + percent + "%");
 
             }
             logger.info("Finished operation... terminating");
