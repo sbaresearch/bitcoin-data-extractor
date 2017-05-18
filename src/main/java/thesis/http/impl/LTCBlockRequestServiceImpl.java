@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile({"ltc", "emer"})
+@Profile({"ltc"})
 @Service
 public class LTCBlockRequestServiceImpl extends AbstractBlockRequestServiceImpl {
 

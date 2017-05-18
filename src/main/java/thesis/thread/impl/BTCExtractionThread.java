@@ -28,7 +28,4 @@ import java.util.concurrent.TimeUnit;
 @Profile("btc")
 @Component
 public class BTCExtractionThread extends AbstractExtractionThread {
-
-
-
 }

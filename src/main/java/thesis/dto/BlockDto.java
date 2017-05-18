@@ -49,6 +49,12 @@ public class BlockDto implements Dto{
 
     private AuxpowDto auxpow;
 
+    private String pow_algo;
+
+    private int pow_alog_id;
+
+    private String pow_hash;
+
     public BlockDto(String hash) {
         this.hash = hash;
     }
@@ -199,5 +205,29 @@ public class BlockDto implements Dto{
 
     public void setAuxpow(AuxpowDto auxpow) {
         this.auxpow = auxpow;
+    }
+
+    public String getPow_algo() {
+        return pow_algo;
+    }
+
+    public void setPow_algo(String pow_algo) {
+        this.pow_algo = pow_algo;
+    }
+
+    public int getPow_alog_id() {
+        return pow_alog_id;
+    }
+
+    public void setPow_alog_id(int pow_alog_id) {
+        this.pow_alog_id = pow_alog_id;
+    }
+
+    public String getPow_hash() {
+        return pow_hash;
+    }
+
+    public void setPow_hash(String pow_hash) {
+        this.pow_hash = pow_hash;
     }
 }

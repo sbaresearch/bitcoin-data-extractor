@@ -2,9 +2,9 @@ spring:
   freemarker:
     checkTemplateLocation: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/emeranalyzer
-    username: emer
-    password: fd44887907ddcccab8c617651e5dbdaf34ff1af0e0996766de95eee382633a94
+    url: jdbc:postgresql://localhost:5432/myriad
+    username: myriad
+    password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
   jpa:
     hibernate:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -18,39 +18,41 @@ spring:
       ordered_inserts: true
       ordered_updates: true
 
-server.port: 8002
-
 chain:
-  firstBlockHash: 00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d
+  firstBlockHash: none
   firstBlockHeight: 0
-  genesisBlock: 00000000bcccd459d036a588d1008fce8da3754b205736f32ddfd35350e84c2d
+  genesisBlock: cb41589c918fba1beccca8bc6b34b2b928b4f9888595d7664afd6ec60a576291
   blockQuerySize: 1000
   testRun: false
-  newRun: false
-  runId: -1
+  newRun: true
+  runId: 5
   lightRun: true
+  hexheaders: false
+
 
 email:
   to: alexei.zamyatin@yahoo.de
-  from: emer.analyzer@sba-research.org
-  subject: Emercoin Analyzer finished execution
+  from: bitcoin.analyzer@sba-research.org
+  subject: Bitcoin Analyzer finished execution
   receiver: Alexei Zamyatin
-  sender: EmercoinAnalyzer
+  sender: BitcoinAnalyzer
   sendMail: true
 
 rest:
-  url: http://localhost:6662/rest
+  url: http://localhost:10889/rest
+
 
 jsonrpc:
   host: http://127.0.0.1
-  port: 6662
-  rpcuser: emercoinrpc
-  rpcpassword: BmeQgUxa3LCAHc1hL72qfLwLotU5GLcE9NEkNycZgvqJ
+  port: 10889
+  rpcuser: myriadrpc
+  rpcpassword: HDCzyuE8oXUFRZW71W6Yd66eJvtQQ5UCdygyxgjVvjS1
+
 
 
 logging:
   path: /var/log
-  file: emer.log
+  file: btc.log
   level:
     root: INFO
     org.springframwork.web: ERROR

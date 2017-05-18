@@ -9,7 +9,7 @@ import thesis.exception.ServiceException;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Profile({"ltc", "emer"})
+@Profile({"ltc"})
 @Component
 public class LTCExtractionThread extends AbstractExtractionThread {
 
