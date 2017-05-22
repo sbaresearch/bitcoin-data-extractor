@@ -22,7 +22,7 @@ chain:
   firstBlockHash: none
   firstBlockHeight: 0
   genesisBlock: cb41589c918fba1beccca8bc6b34b2b928b4f9888595d7664afd6ec60a576291
-  blockQuerySize: 100
+  blockQuerySize: 1000
   testRun: false
   newRun: true
   runId: 5

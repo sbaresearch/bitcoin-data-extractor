@@ -108,7 +108,8 @@ public class AbstractExtractionThread implements ExtractionService {
 
             Block lastBlock = blockService.readLastBlock();
 
-            logger.info("Analysis starts at " + lastBlock.getHeight() + " and will stop at block " + currentBlockHeight);
+            String startingHeight = (lastBlock == null) ? " 0 " : String.valueOf(lastBlock.getHeight());
+            logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
             logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
             logger.info("Retrieving blockhashes");
 
@@ -136,7 +137,7 @@ public class AbstractExtractionThread implements ExtractionService {
                 // start http request performance meter
                 final Timer.Context hashcontext = hashRequestTimer.time();
 
-                List<BlockDto> blockhashes = blockRequestService.getBlockHashes(blockQuerySize, blockhash);
+                List<BlockDto> blockhashes = retrieveBlockHashes(blockQuerySize, blockhash, blockHeight);
 
                 // stop http request performance meter
                 hashcontext.stop();
@@ -168,6 +169,18 @@ public class AbstractExtractionThread implements ExtractionService {
             finalizeAndReport();
         }
 
+    }
+
+    /**
+     * Retrieves list of block hashes based on the current block height / block hash. Implementation may differ depending on blockchain
+     * @param blockQuerySize - size of list to be retrieved
+     * @param blockhash - current block hash
+     * @param blockHeight  - current block height
+     * @return
+     * @throws ServiceException
+     */
+    protected List<BlockDto> retrieveBlockHashes(Integer blockQuerySize, String blockhash, int blockHeight) throws ServiceException {
+        return blockRequestService.getBlockHashes(blockQuerySize, blockhash);
     }
 
 
