@@ -45,10 +45,13 @@ public class Block extends thesis.model.Entity{
 
     private boolean merged_mined;
 
+    @Column(nullable = true)
     private String pow_algo;
 
-    private int pow_alog_id;
+    @Column(nullable = true)
+    private Integer pow_alog_id;
 
+    @Column(nullable = true)
     private String pow_hash;
 
     @OneToMany(mappedBy = "block", cascade = CascadeType.ALL)
