@@ -15,7 +15,7 @@ import thesis.exception.ServiceException;
 import thesis.http.NMCEntityRequestService;
 import thesis.model.NMCEntity;
 
-@Profile("nmc")
+@Profile({"nmc", "ncsq"})
 @Service
 public class NMCEntityRequestServiceImpl implements NMCEntityRequestService {
 

@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-@Profile("nmc")
+@Profile({"nmc", "ncsq"})
 @Component
 public class NMCExtractionThread extends AbstractExtractionThread {
 
