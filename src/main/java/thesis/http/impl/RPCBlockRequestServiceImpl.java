@@ -4,20 +4,18 @@ package thesis.http.impl;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import thesis.dto.BlockDto;
 import thesis.exception.ServiceException;
-import thesis.http.util.HttpJsonClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile({"ltc"})
 @Service
-public class LTCBlockRequestServiceImpl extends AbstractBlockRequestServiceImpl {
+public class RPCBlockRequestServiceImpl extends RESTBlockRequestServiceImpl {
 
     @Override
     public Integer getCurrentBlockHeight() throws ServiceException {
@@ -52,17 +50,44 @@ public class LTCBlockRequestServiceImpl extends AbstractBlockRequestServiceImpl 
         return currentBlockHeight;
     }
 
-
     @Override
-    public List<BlockDto> getBlockHashes(Integer count, String hash) throws ServiceException {
+    public List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException {
 
+        List<BlockDto> blockDtos = new ArrayList<>();
+        // create first part of JSON request object
+        JSONObject jsonRequest = new JSONObject();
+        jsonRequest.put("id", "block_request");
+        jsonRequest.put("method", "getblockhash");
 
-        String restUrl = url + "/headers/" + count + "/" + hash + ".json";
+        // execute json request
+        String response;
 
-        List<BlockDto> hashArray = Arrays.asList(restTemplate.getForObject(restUrl, BlockDto[].class));
+        for(int height = start; height <= end; height++){
 
-        logger.debug(restUrl);
+            // add parameters to json request
+            JSONArray params = new JSONArray();
+            params.add(0, height);
+            jsonRequest.put("params", params);
+            try {
+                response = httpJsonClient.execute(jsonRequest);
 
-        return hashArray;
+                // parse json object
+                Object resultObject = JSONValue.parse(response);
+
+                JSONObject jsonRoot = (JSONObject) resultObject;
+
+                // retrieve hash from json object
+                String hash = jsonRoot.get("result").toString();
+
+                blockDtos.add(new BlockDto(hash));
+
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+                throw new ServiceException(e.getMessage());
+            }
+        }
+
+        return blockDtos;
     }
 }

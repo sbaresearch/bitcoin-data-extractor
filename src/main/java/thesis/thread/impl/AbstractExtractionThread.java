@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import thesis.dto.BlockDto;
 import thesis.exception.ServiceException;
-import thesis.http.BlockRequestService;
+import thesis.http.RESTBlockRequestService;
+import thesis.http.RPCBlockRequestService;
 import thesis.model.*;
 import thesis.service.BlockService;
 import thesis.service.MetainfoService;
@@ -25,7 +26,10 @@ public class AbstractExtractionThread implements ExtractionService {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    protected BlockRequestService blockRequestService;
+    protected RESTBlockRequestService restBlockRequestService;
+
+    @Autowired
+    protected RPCBlockRequestService rpcBlockRequestService;
 
     @Autowired
     protected BlockService blockService;
@@ -180,7 +184,7 @@ public class AbstractExtractionThread implements ExtractionService {
      * @throws ServiceException
      */
     protected List<BlockDto> retrieveBlockHashes(Integer blockQuerySize, String blockhash, int blockHeight) throws ServiceException {
-        return blockRequestService.getBlockHashes(blockQuerySize, blockhash);
+        return restBlockRequestService.getBlockHashes(blockQuerySize, blockhash);
     }
 
 
@@ -221,11 +225,20 @@ public class AbstractExtractionThread implements ExtractionService {
             logger.info(metainfo.toString());
             logger.info("Retrieving current blockheight");
 
-            currentBlockHeight = blockRequestService.getCurrentBlockHeight();
+            currentBlockHeight = extractCurrentBlockHeight();
 
             currentBlockHeight = currentBlockHeight - BLOCK_SAFETY_BUFFER;
         }
 
+    }
+
+    /**
+     * Returns the current block height as seen by the respective blockchain client
+     * @return - int representation of current block height
+     * @throws ServiceException
+     */
+    protected int extractCurrentBlockHeight() throws ServiceException {
+        return restBlockRequestService.getCurrentBlockHeight();
     }
 
     /**
@@ -247,7 +260,7 @@ public class AbstractExtractionThread implements ExtractionService {
             final Timer.Context blockContext = blockRequestTimer.time();
 
             // get detailed block data incl. block transactions
-            Block block = blockRequestService.getBlockByHash(blockDto.getHash());
+            Block block = restBlockRequestService.getBlockByHash(blockDto.getHash());
 
             // stop block http request performance meter
             blockContext.stop();

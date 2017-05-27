@@ -1,5 +1,6 @@
 package thesis.http.impl;
 
+import org.bouncycastle.util.encoders.Hex;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -12,10 +13,10 @@ import thesis.converter.impl.BlockConverter;
 import thesis.dto.BlockDto;
 import thesis.dto.ChainInfosDto;
 import thesis.exception.ServiceException;
-import thesis.http.BlockRequestService;
+import thesis.http.RESTBlockRequestService;
 import thesis.http.util.HttpJsonClient;
 import thesis.model.Block;
-import thesis.model.Transaction;
+import thesis.util.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public abstract class AbstractBlockRequestServiceImpl implements BlockRequestService {
+public abstract class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -39,7 +40,7 @@ public abstract class AbstractBlockRequestServiceImpl implements BlockRequestSer
     @Value("${rest.url}")
     protected String url;
 
-    public AbstractBlockRequestServiceImpl() {
+    public RESTBlockRequestServiceImpl() {
         this.restTemplate = new RestTemplate();
     }
 
@@ -79,46 +80,55 @@ public abstract class AbstractBlockRequestServiceImpl implements BlockRequestSer
         return hashArray;
     }
 
+
     @Override
-    public List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException {
+    public List<BlockDto> getBlockHashesHex(Integer count, String hash) throws ServiceException {
 
+
+        String restUrl = url + "/headers/" + count + "/" + hash + ".hex";
+
+        List<BlockDto> hashArray;
+
+        hashArray = hexToBlockDto(restTemplate.getForObject(restUrl, String.class));
+
+        logger.debug(restUrl);
+
+        return hashArray;
+    }
+
+
+    public List<BlockDto> hexToBlockDto(String hex) throws ServiceException {
         List<BlockDto> blockDtos = new ArrayList<>();
-        // create first part of JSON request object
-        JSONObject jsonRequest = new JSONObject();
-        jsonRequest.put("id", "block_request");
-        jsonRequest.put("method", "getblockhash");
 
-        // execute json request
-        String response;
+        hex = hex.replace("\n", "").replace("\r", "");
+        List<String> hexVals = new ArrayList<>();
+        int index = 0;
+        while (index < hex.length()) {
+            String hex_header = hex.substring(index, Math.min(index + 160, hex.length()));
 
-        for(int height = start; height <= end; height++){
-
-            // add parameters to json request
-            JSONArray params = new JSONArray();
-            params.add(0, height);
-            jsonRequest.put("params", params);
-            try {
-                response = httpJsonClient.execute(jsonRequest);
-
-                // parse json object
-                Object resultObject = JSONValue.parse(response);
-
-                JSONObject jsonRoot = (JSONObject) resultObject;
-
-                // retrieve hash from json object
-                String hash = jsonRoot.get("result").toString();
-
-                blockDtos.add(new BlockDto(hash));
-
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-                throw new ServiceException(e.getMessage());
+            /**
+             * skip newline characters
+             */
+            if (hex_header.length() != 160) {
+                continue;
             }
+            hexVals.add(hex_header);
+            byte[] bin_header = Hex.decode(hex_header);
+
+            /*
+            * check if merged mined or not, i.e. block count > 371337,
+            * or hash = 60323982f9c5ff1b5a954eac9dc1269352835f47c2c5222691d80f0d50dcf053
+             */
+            String blockhash = Hex.toHexString(Utils.doubleSha256Hash(bin_header));
+            blockDtos.add(new BlockDto(blockhash));
+
+
+            index += 160;
         }
 
         return blockDtos;
     }
 
 
+    public abstract List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException;
 }

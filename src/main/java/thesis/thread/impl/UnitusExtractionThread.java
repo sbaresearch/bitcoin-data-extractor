@@ -12,7 +12,12 @@ import java.util.List;
 public class UnitusExtractionThread extends AbstractExtractionThread {
 
     @Override
+    protected int extractCurrentBlockHeight() throws ServiceException {
+        return rpcBlockRequestService.getCurrentBlockHeight();
+    }
+
+    @Override
     protected List<BlockDto> retrieveBlockHashes(Integer blockQuerySize, String blockhash, int blockHeight) throws ServiceException {
-        return blockRequestService.getBlockHashesByHeight(blockHeight, blockHeight + blockQuerySize);
+        return rpcBlockRequestService.getBlockHashesByHeight(blockHeight, blockHeight + blockQuerySize);
     }
 }

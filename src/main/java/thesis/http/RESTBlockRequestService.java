@@ -7,7 +7,7 @@ import thesis.model.Block;
 import java.util.List;
 
 
-public interface BlockRequestService {
+public interface RESTBlockRequestService {
 
     /**
      * Method: REST
@@ -31,12 +31,5 @@ public interface BlockRequestService {
      */
     List<BlockDto> getBlockHashes(Integer count, String hash) throws ServiceException;
 
-    /**
-     * Method: JSON RPC
-     * Returns a list of blockhashes between the given start and end blocks
-     * @param start - staring height
-     * @param end - end height
-     * @return - list of blockhashes
-     */
-    List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException;
+    List<BlockDto> getBlockHashesHex(Integer count, String hash) throws ServiceException;
 }

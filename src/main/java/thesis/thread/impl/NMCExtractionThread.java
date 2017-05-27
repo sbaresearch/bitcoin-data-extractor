@@ -1,10 +1,6 @@
 package thesis.thread.impl;
 
-import com.codahale.metrics.ConsoleReporter;
-import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -12,22 +8,11 @@ import org.springframework.stereotype.Component;
 import thesis.dto.*;
 import thesis.exception.NotFoundException;
 import thesis.exception.ServiceException;
-import thesis.http.BlockRequestService;
 import thesis.http.NMCEntityRequestService;
-import thesis.http.TransactionRequestService;
 import thesis.model.*;
-import thesis.service.*;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.IDN;
-import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @Profile({"nmc", "ncsq"})
 @Component
@@ -63,7 +48,7 @@ public class NMCExtractionThread extends AbstractExtractionThread {
 
             final Timer.Context blockContext = blockRequestTimer.time();
 
-            Block block = blockRequestService.getBlockByHash(blockDto.getHash());
+            Block block = restBlockRequestService.getBlockByHash(blockDto.getHash());
 
             if(extractNames){
                 for (Transaction transaction : block.getTransactions()) {
