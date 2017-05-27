@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import thesis.converter.impl.BlockConverter;
 import thesis.dto.BlockDto;
@@ -24,14 +25,11 @@ import java.util.Arrays;
 import java.util.List;
 
 
+@Service
 public abstract class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected RestTemplate restTemplate;
-
-    @Autowired
-    protected HttpJsonClient httpJsonClient;
 
     @Autowired
     protected BlockConverter converter;

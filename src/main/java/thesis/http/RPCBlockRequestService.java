@@ -2,7 +2,6 @@ package thesis.http;
 
 import thesis.dto.BlockDto;
 import thesis.exception.ServiceException;
-import thesis.model.Block;
 
 import java.util.List;
 
