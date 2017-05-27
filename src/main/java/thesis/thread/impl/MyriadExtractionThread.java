@@ -10,7 +10,7 @@ import thesis.thread.impl.AbstractExtractionThread;
 
 import java.util.List;
 
-@Profile("unitus")
+@Profile("myriad")
 @Component
 public class MyriadExtractionThread extends AbstractExtractionThread {
 
