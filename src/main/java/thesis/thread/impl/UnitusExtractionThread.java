@@ -7,7 +7,7 @@ import thesis.exception.ServiceException;
 
 import java.util.List;
 
-@Profile("myriad")
+@Profile("unitus")
 @Component
 public class UnitusExtractionThread extends AbstractExtractionThread {
 
