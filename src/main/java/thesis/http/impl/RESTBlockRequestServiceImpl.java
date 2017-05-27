@@ -26,7 +26,7 @@ import java.util.List;
 
 
 @Service
-public abstract class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
+public class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -127,7 +127,4 @@ public abstract class RESTBlockRequestServiceImpl implements RESTBlockRequestSer
 
         return blockDtos;
     }
-
-
-    public abstract List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException;
 }
