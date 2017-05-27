@@ -28,6 +28,7 @@ import java.util.List;
 @Service
 public abstract class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected RestTemplate restTemplate;
 
