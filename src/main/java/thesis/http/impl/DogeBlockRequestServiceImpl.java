@@ -11,7 +11,7 @@ import thesis.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-@Profile({"doge", "myriad"})
+@Profile({"doge", "myriad", "unitus"})
 @Service
 public class DogeBlockRequestServiceImpl extends AbstractBlockRequestServiceImpl {
 

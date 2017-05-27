@@ -1,0 +1,59 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/unitus
+    username: unitus
+    password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+chain:
+  firstBlockHash: none
+  firstBlockHeight: 0
+  genesisBlock: cb41589c918fba1beccca8bc6b34b2b928b4f9888595d7664afd6ec60a576291
+  blockQuerySize: 1000
+  testRun: false
+  newRun: true
+  runId: 5
+  lightRun: true
+  hexheaders: false
+
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: unitus.analyzer@sba-research.org
+  subject: Unitus Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender: UnitusAnalyzer
+  sendMail: true
+
+rest:
+  url: http://localhost:10889/rest
+
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 50604
+  rpcuser: unitusrpc
+  rpcpassword: CNZsWcEEAn4x4yd387YMV7kPPfFH7cWEfinaQRDP2WeK
+
+
+
+logging:
+  path: /var/log
+  file: btc.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR
