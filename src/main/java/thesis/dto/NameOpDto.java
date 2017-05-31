@@ -20,7 +20,8 @@ public class NameOpDto implements Dto{
     private String name;
 
     private String op;
-
+    
+    @JsonSerialize(using = NameSerializer.class)
     private String value;
 
     private String rand;
