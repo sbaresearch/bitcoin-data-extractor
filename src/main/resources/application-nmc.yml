@@ -2,7 +2,7 @@ spring:
   freemarker:
     checkTemplateLocation: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/ncanalyzer
+    url: jdbc:postgresql://localhost:5432/nmcanalyzer
     username: nmc
     password: d76827e837f1b94e4ba538666252cd18101f90b56b4f49890587bb86509433c2
   jpa:
