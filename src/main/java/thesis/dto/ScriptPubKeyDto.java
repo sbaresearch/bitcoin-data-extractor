@@ -1,5 +1,6 @@
 package thesis.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class ScriptPubKeyDto implements Dto {
 
     private String type;
 
+    @JsonIgnore
     private NameOpDto nameOp;
 
     private List<String> addresses;
@@ -63,10 +65,11 @@ public class ScriptPubKeyDto implements Dto {
         this.type = type;
     }
 
+    @JsonIgnore
     public NameOpDto getNameOp() {
         return nameOp;
     }
-
+    @JsonIgnore
     public void setNameOp(NameOpDto nameOp) {
         this.nameOp = nameOp;
     }
