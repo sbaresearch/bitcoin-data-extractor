@@ -1,9 +1,6 @@
 package thesis.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -20,8 +17,8 @@ public class NameOpDto implements Dto{
     private String name;
 
     private String op;
-    
-    @JsonSerialize(using = NameSerializer.class)
+
+    @JsonIgnore
     private String value;
 
     private String rand;
@@ -43,10 +40,12 @@ public class NameOpDto implements Dto{
         this.op = op;
     }
 
+    @JsonIgnore
     public String getValue() {
         return value;
     }
 
+    @JsonIgnore
     public void setValue(String value) {
         this.value = value;
     }

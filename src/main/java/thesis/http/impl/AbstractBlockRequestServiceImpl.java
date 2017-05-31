@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import thesis.converter.impl.BlockConverter;
 import thesis.dto.BlockDto;
@@ -18,6 +19,7 @@ import thesis.model.Block;
 import thesis.model.Transaction;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +43,8 @@ public abstract class AbstractBlockRequestServiceImpl implements BlockRequestSer
 
     public AbstractBlockRequestServiceImpl() {
         this.restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters()
+                .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
     }
 
     @Override
