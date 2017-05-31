@@ -2,6 +2,7 @@ package thesis.http;
 
 import thesis.dto.BlockDto;
 import thesis.exception.ServiceException;
+import thesis.model.Block;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface RPCBlockRequestService {
      * @return - list of blockhashes
      */
     List<BlockDto> getBlockHashesByHeight(int start, int end) throws ServiceException;
+
+    Block getBlockByHash(String hash) throws ServiceException;
 }

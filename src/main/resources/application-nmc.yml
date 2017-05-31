@@ -28,8 +28,8 @@ chain:
   testRun: false
   runId: -1 # -1 to continue last run, or specify specific run to resume it
   newRun: true
-  lightRun: false
-  extractNames: true
+  lightRun: true
+  extractNames: false
 
 email:
   to: alexei.zamyatin@yahoo.de

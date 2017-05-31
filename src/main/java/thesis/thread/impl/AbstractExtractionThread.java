@@ -260,7 +260,7 @@ public class AbstractExtractionThread implements ExtractionService {
             final Timer.Context blockContext = blockRequestTimer.time();
 
             // get detailed block data incl. block transactions
-            Block block = restBlockRequestService.getBlockByHash(blockDto.getHash());
+            Block block = getBlock(blockDto.getHash());
 
             // stop block http request performance meter
             blockContext.stop();
@@ -285,6 +285,15 @@ public class AbstractExtractionThread implements ExtractionService {
             dbContext.stop();
 
         }
+    }
+
+    /**
+     * Return block object with the given block hash
+     * @param hash
+     * @return
+     */
+    protected Block getBlock(String hash) throws ServiceException {
+        return restBlockRequestService.getBlockByHash(hash);
     }
 
 
@@ -353,7 +362,7 @@ public class AbstractExtractionThread implements ExtractionService {
         metainfo.setExtracted_transactions(transactionCounter);
         metainfo.setExtracted_blocks(blockCounter);
         metainfo.setEndBlock(currentBlockHeight);
-        metainfo.setNotes(operationMessage);
+        //metainfo.setNotes(operationMessage);
 
         metainfoService.update(metainfo);
     }
