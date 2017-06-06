@@ -135,6 +135,8 @@ public class AbstractExtractionThread implements ExtractionService {
 
             logger.info("Retrieving blockhashes");
 
+            boolean first = true;
+
             while (!finished) {
 
                 // check if end of chain has been reached
@@ -148,6 +150,10 @@ public class AbstractExtractionThread implements ExtractionService {
 
                 List<BlockDto> blockhashes = retrieveBlockHashes(blockQuerySize, blockhash, blockHeight);
 
+                if(blockHeight != 0 && first){
+                    blockhashes.remove(0);
+                    first = false;
+                }
                 // stop http request performance meter
                 hashcontext.stop();
 
