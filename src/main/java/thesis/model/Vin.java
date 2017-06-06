@@ -32,6 +32,7 @@ public class Vin extends thesis.model.Entity {
 
     private String vin_txid;
 
+    @Column(length = 1024)
     private String coinbase;
 
     private int blockheight;

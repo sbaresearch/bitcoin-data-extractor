@@ -21,6 +21,8 @@ public interface RESTBlockRequestService {
      */
     Block getBlockByHash(String hash) throws ServiceException;
 
+    Block getBlockByHashNoTxDetails(String hash) throws ServiceException;
+
     /**
      * Method: REST
      * Retrieves a list of "count" blockhashes given the starting hash

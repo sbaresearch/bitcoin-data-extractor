@@ -11,6 +11,7 @@ import thesis.dto.BlockDto;
 import thesis.exception.ServiceException;
 import thesis.http.RESTBlockRequestService;
 import thesis.http.RPCBlockRequestService;
+import thesis.http.TransactionRequestService;
 import thesis.model.*;
 import thesis.service.BlockService;
 import thesis.service.MetainfoService;
@@ -27,6 +28,9 @@ public class AbstractExtractionThread implements ExtractionService {
 
     @Autowired
     protected RESTBlockRequestService restBlockRequestService;
+
+    @Autowired
+    protected TransactionRequestService transactionRequestService;
 
     @Autowired
     protected RPCBlockRequestService rpcBlockRequestService;
@@ -115,7 +119,6 @@ public class AbstractExtractionThread implements ExtractionService {
             String startingHeight = (lastBlock == null) ? " 0 " : String.valueOf(lastBlock.getHeight());
             logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
             logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
-            logger.info("Retrieving blockhashes");
 
             int blockHeight;
             boolean finished = false;
@@ -129,6 +132,8 @@ public class AbstractExtractionThread implements ExtractionService {
                 blockHeight = lastBlock.getHeight();
                 blockhash = lastBlock.getHash();
             }
+
+            logger.info("Retrieving blockhashes");
 
             while (!finished) {
 
@@ -162,7 +167,7 @@ public class AbstractExtractionThread implements ExtractionService {
 
         } catch (Exception e) {
             logger.error(e.getMessage());
-
+            e.printStackTrace();
             operationMessage = "Operation failed! \n"
                     + "Error message : " + e.getMessage();
 

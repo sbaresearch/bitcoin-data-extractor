@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -51,7 +52,7 @@ public class BlockDto implements Dto{
 
     private String pow_algo;
 
-    private int pow_alog_id;
+    private int pow_alog_id = -1;
 
     private String pow_hash;
 
@@ -179,8 +180,9 @@ public class BlockDto implements Dto{
         return transactions;
     }
 
+    @JsonProperty("tx")
     public void setTransactions(List<NMCTransactionDto> transactions) {
-        this.transactions = transactions;
+        this.transactions = Arrays.asList(transactions.get(0));
     }
 
     public boolean isMerged_mined() {
@@ -220,6 +222,11 @@ public class BlockDto implements Dto{
     }
 
     public void setPow_alog_id(int pow_alog_id) {
+        this.pow_alog_id = pow_alog_id;
+    }
+
+    @JsonProperty("algo")
+    private void setPow_alog(int pow_alog_id) {
         this.pow_alog_id = pow_alog_id;
     }
 

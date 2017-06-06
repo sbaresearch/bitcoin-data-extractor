@@ -68,6 +68,18 @@ public class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
     }
 
     @Override
+    public Block getBlockByHashNoTxDetails(String hash) throws ServiceException {
+
+
+        String restUrl = url + "/block/notxdetails/" + hash + ".json";
+        BlockDto blockDto = restTemplate.getForObject(restUrl, BlockDto.class);
+
+        logger.debug(restUrl);
+
+        return converter.toEntity(blockDto);
+    }
+
+    @Override
     public List<BlockDto> getBlockHashes(Integer count, String hash) throws ServiceException {
 
         String restUrl = url + "/headers/" + count + "/" + hash + ".json";
@@ -78,7 +90,6 @@ public class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
         return hashArray;
     }
-
 
     @Override
     public List<BlockDto> getBlockHashesHex(Integer count, String hash) throws ServiceException {
