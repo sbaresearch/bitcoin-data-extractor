@@ -19,7 +19,6 @@ public class ScriptPubKeyDto implements Dto {
 
     private String type;
 
-    @JsonIgnore
     private NameOpDto nameOp;
 
     private List<String> addresses;
@@ -65,12 +64,10 @@ public class ScriptPubKeyDto implements Dto {
         this.type = type;
     }
 
-    @JsonIgnore
     public NameOpDto getNameOp() {
         return nameOp;
     }
 
-    @JsonIgnore
     public void setNameOp(NameOpDto nameOp) {
         this.nameOp = nameOp;
     }

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import thesis.converter.impl.BlockConverter;
@@ -20,6 +21,7 @@ import thesis.model.Block;
 import thesis.util.Utils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +62,10 @@ public class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
 
 
         String restUrl = url + "/block/" + hash + ".json";
+
+        restTemplate.getMessageConverters()
+                .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+
         BlockDto blockDto = restTemplate.getForObject(restUrl, BlockDto.class);
 
         logger.debug(restUrl);
