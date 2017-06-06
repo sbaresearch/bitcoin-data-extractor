@@ -150,10 +150,6 @@ public class AbstractExtractionThread implements ExtractionService {
 
                 List<BlockDto> blockhashes = retrieveBlockHashes(blockQuerySize, blockhash, blockHeight);
 
-                if(blockHeight != 0 && first){
-                    blockhashes.remove(0);
-                    first = false;
-                }
                 // stop http request performance meter
                 hashcontext.stop();
 
