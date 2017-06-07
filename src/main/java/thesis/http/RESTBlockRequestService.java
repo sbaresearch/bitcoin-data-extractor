@@ -1,6 +1,7 @@
 package thesis.http;
 
 import thesis.dto.BlockDto;
+import thesis.dto.BlockDtoTxFree;
 import thesis.exception.ServiceException;
 import thesis.model.Block;
 
@@ -21,7 +22,7 @@ public interface RESTBlockRequestService {
      */
     Block getBlockByHash(String hash) throws ServiceException;
 
-    Block getBlockByHashNoTxDetails(String hash) throws ServiceException;
+    BlockDtoTxFree getBlockByHashNoTxDetails(String hash) throws ServiceException;
 
     /**
      * Method: REST

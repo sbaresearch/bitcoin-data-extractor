@@ -1,9 +1,6 @@
 package thesis.http.impl;
 
 import org.bouncycastle.util.encoders.Hex;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import thesis.converter.impl.BlockConverter;
 import thesis.dto.BlockDto;
+import thesis.dto.BlockDtoTxFree;
 import thesis.dto.ChainInfosDto;
 import thesis.exception.ServiceException;
 import thesis.http.RESTBlockRequestService;
-import thesis.http.util.HttpJsonClient;
 import thesis.model.Block;
 import thesis.util.Utils;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,15 +70,15 @@ public class RESTBlockRequestServiceImpl implements RESTBlockRequestService {
     }
 
     @Override
-    public Block getBlockByHashNoTxDetails(String hash) throws ServiceException {
+    public BlockDtoTxFree getBlockByHashNoTxDetails(String hash) throws ServiceException {
 
 
         String restUrl = url + "/block/notxdetails/" + hash + ".json";
-        BlockDto blockDto = restTemplate.getForObject(restUrl, BlockDto.class);
+        BlockDtoTxFree blockDto = restTemplate.getForObject(restUrl, BlockDtoTxFree.class);
 
         logger.debug(restUrl);
 
-        return converter.toEntity(blockDto);
+        return blockDto;
     }
 
     @Override

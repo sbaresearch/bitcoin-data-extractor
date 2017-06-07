@@ -1,15 +1,15 @@
 package thesis.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class BlockDto implements Dto{
+/**
+ * This class is only used for mapping in case the list of transactions is not available or returner corrupted from the blockchain
+ * client (e.g. Huntercoin)
+ */
+public class BlockDtoTxFree {
 
     private String hash;
 
@@ -47,47 +47,7 @@ public class BlockDto implements Dto{
     private boolean merged_mined;
 
     @JsonProperty("tx")
-    private List<NMCTransactionDto> transactions;
-
-    private AuxpowDto auxpow;
-
-    private String pow_algo;
-
-    private int pow_alog_id = -1;
-
-    private String pow_hash;
-
-    public BlockDto(String hash) {
-        this.hash = hash;
-    }
-
-    public BlockDto() {
-
-    }
-
-    public BlockDto(BlockDtoTxFree blockDtoTxFree) {
-        this.hash = blockDtoTxFree.getHash();
-        this.confirmations = blockDtoTxFree.getConfirmations();
-        this.size = blockDtoTxFree.getSize();
-        this.height = blockDtoTxFree.getHeight();
-        this.version = blockDtoTxFree.getVersion();
-        this.merkleroot = blockDtoTxFree.getMerkleroot();
-        this.numberOfTransactions = blockDtoTxFree.getNumberOfTransactions();
-        this.time = blockDtoTxFree.getTime();
-        this.nonce = blockDtoTxFree.getNonce();
-        this.bits = blockDtoTxFree.getBits();
-        this.difficulty = blockDtoTxFree.getDifficulty();
-        this.chainwork = blockDtoTxFree.getChainwork();
-        this.mediantime = blockDtoTxFree.getMediantime();
-        this.previousBlockHash = blockDtoTxFree.getPreviousBlockHash();
-        this.nextBlockHash = blockDtoTxFree.getNextBlockHash();
-        this.merged_mined = blockDtoTxFree.isMerged_mined();
-        this.auxpow = blockDtoTxFree.getAuxpow();
-        this.pow_algo = blockDtoTxFree.getPow_algo();
-        this.pow_alog_id = blockDtoTxFree.getPow_alog_id();
-        this.pow_hash = blockDtoTxFree.getPow_hash();
-        this.transactions = new ArrayList<>();
-    }
+    private List<String> txids;
 
     public String getHash() {
         return hash;
@@ -185,6 +145,14 @@ public class BlockDto implements Dto{
         this.chainwork = chainwork;
     }
 
+    public Long getMediantime() {
+        return mediantime;
+    }
+
+    public void setMediantime(Long mediantime) {
+        this.mediantime = mediantime;
+    }
+
     public String getPreviousBlockHash() {
         return previousBlockHash;
     }
@@ -201,15 +169,6 @@ public class BlockDto implements Dto{
         this.nextBlockHash = nextBlockHash;
     }
 
-    public List<NMCTransactionDto> getTransactions() {
-        return transactions;
-    }
-
-    @JsonProperty("tx")
-    public void setTransactions(List<NMCTransactionDto> transactions) {
-        this.transactions = Arrays.asList(transactions.get(0));
-    }
-
     public boolean isMerged_mined() {
         return merged_mined;
     }
@@ -218,12 +177,12 @@ public class BlockDto implements Dto{
         this.merged_mined = merged_mined;
     }
 
-    public Long getMediantime() {
-        return mediantime;
+    public List<String> getTxids() {
+        return txids;
     }
 
-    public void setMediantime(Long mediantime) {
-        this.mediantime = mediantime;
+    public void setTxids(List<String> txids) {
+        this.txids = txids;
     }
 
     public AuxpowDto getAuxpow() {
@@ -250,11 +209,6 @@ public class BlockDto implements Dto{
         this.pow_alog_id = pow_alog_id;
     }
 
-    @JsonProperty("algo")
-    private void setPow_alog(int pow_alog_id) {
-        this.pow_alog_id = pow_alog_id;
-    }
-
     public String getPow_hash() {
         return pow_hash;
     }
@@ -262,5 +216,13 @@ public class BlockDto implements Dto{
     public void setPow_hash(String pow_hash) {
         this.pow_hash = pow_hash;
     }
+
+    private AuxpowDto auxpow;
+
+    private String pow_algo;
+
+    private int pow_alog_id = -1;
+
+    private String pow_hash;
 
 }
