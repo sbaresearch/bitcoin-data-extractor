@@ -1,0 +1,59 @@
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:postgresql://localhost:5433/viacoin
+    username: via
+    password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
+  jpa:
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: update
+      jdbc.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate.batch_size: 100
+      ordered_inserts: true
+      ordered_updates: true
+
+chain:
+  firstBlockHash: 4e9b54001f9976049830128ec0331515eaabe35a70970d79971da1539a400ba1
+  firstBlockHeight: 0
+  genesisBlock: 4e9b54001f9976049830128ec0331515eaabe35a70970d79971da1539a400ba1
+  blockQuerySize: 1000
+  testRun: false
+  newRun: true
+  runId: -1
+  lightRun: true
+  hexheaders: false
+
+
+email:
+  to: alexei.zamyatin@yahoo.de
+  from: viacoin.analyzer@sba-research.org
+  subject: Viacoin Analyzer finished execution
+  receiver: Alexei Zamyatin
+  sender: ViacoinAnalyzer
+  sendMail: true
+
+rest:
+  url: http://localhost:5222/rest
+
+
+jsonrpc:
+  host: http://127.0.0.1
+  port: 5222
+  rpcuser: alexei
+  rpcpassword: 51a7213f7a46013e3630bf696bd7211ad1d2cb4d4f03acc42a642c0dedbbe309
+
+
+
+logging:
+  path: /var/log
+  file: btc.log
+  level:
+    root: INFO
+    org.springframwork.web: ERROR
+    org.hibernate: ERROR
