@@ -19,8 +19,8 @@ spring:
       ordered_updates: true
 
 chain:
-  firstBlockHash: 0000000000000000023197f12d821fc88853776f2f4be54a956eb15740166e66
-  firstBlockHeight: 437002
+  firstBlockHash: 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+  firstBlockHeight: 0
   genesisBlock: 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
   blockQuerySize: 1000
   testRun: false
