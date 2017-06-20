@@ -2,7 +2,7 @@ spring:
   freemarker:
     checkTemplateLocation: false
   datasource:
-    url: jdbc:postgresql://localhost:5434/btcanalyzer
+    url: jdbc:postgresql://localhost:5433/btcanalyzer
     username: btc
     password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
   jpa:
