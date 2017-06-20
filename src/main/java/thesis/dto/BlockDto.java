@@ -208,6 +208,7 @@ public class BlockDto implements Dto{
     @JsonProperty("tx")
     public void setTransactions(List<NMCTransactionDto> transactions) {
         this.transactions = Arrays.asList(transactions.get(0));
+        setNumberOfTransactions(transactions.size());
     }
 
     public boolean isMerged_mined() {
