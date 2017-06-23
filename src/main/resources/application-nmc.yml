@@ -27,7 +27,7 @@ chain:
   blockQuerySize: 1000
   testRun: false
   runId: -1 # -1 to continue last run, or specify specific run to resume it
-  newRun: true
+  newRun: false
   lightRun: true
   extractNames: false
 

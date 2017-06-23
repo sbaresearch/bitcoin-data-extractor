@@ -24,7 +24,7 @@ chain:
   genesisBlock: 00000000db7eb7a9e1a06cf995363dcdc4c28e8ae04827a961942657db9a1631
   blockQuerySize: 1000
   testRun: false
-  newRun: true
+  newRun: false
   runId: -1
   lightRun: true
   hexheaders: false
