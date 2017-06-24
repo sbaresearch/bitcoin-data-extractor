@@ -2,7 +2,7 @@ spring:
   freemarker:
     checkTemplateLocation: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/huntercoin
+    url: jdbc:postgresql://localhost:5432/hunternew
     username: hunter
     password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
   jpa:
@@ -19,12 +19,12 @@ spring:
       ordered_updates: true
 
 chain:
-  firstBlockHash:
+  firstBlockHash: 00000000db7eb7a9e1a06cf995363dcdc4c28e8ae04827a961942657db9a1631
   firstBlockHeight: 0
   genesisBlock: 00000000db7eb7a9e1a06cf995363dcdc4c28e8ae04827a961942657db9a1631
   blockQuerySize: 1000
   testRun: false
-  newRun: false
+  newRun: true
   runId: -1
   lightRun: true
   hexheaders: false

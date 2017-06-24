@@ -19,13 +19,13 @@ spring:
       ordered_updates: true
 
 chain:
-  firstBlockHash: none
+  firstBlockHash: cb41589c918fba1beccca8bc6b34b2b928b4f9888595d7664afd6ec60a576291
   firstBlockHeight: 0
   genesisBlock: cb41589c918fba1beccca8bc6b34b2b928b4f9888595d7664afd6ec60a576291
   blockQuerySize: 1000
   testRun: false
   newRun: false
-  runId: 5
+  runId: -1
   lightRun: true
   hexheaders: false
 
