@@ -127,7 +127,7 @@ public class AbstractExtractionThread implements ExtractionService {
             if (lastBlock == null) {
                 if (!newRun) throw new ServiceException("No previous data found. Please configure to start a new run");
                 blockhash = genesisBlock;
-                blockHeight = 0;
+                blockHeight = firstBlockHeight;
             } else {
                 blockHeight = lastBlock.getHeight();
                 blockhash = lastBlock.getHash();
