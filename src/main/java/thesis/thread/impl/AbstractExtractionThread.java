@@ -68,6 +68,12 @@ public class AbstractExtractionThread implements ExtractionService {
     @Value("${chain.safetyBuffer}")
     protected boolean safetyBuffer;
 
+    @Value("${exec.continuous}")
+    protected boolean continuous;
+
+    @Value("${exec.sleep}")
+    protected int sleep;
+
     @Value("${chain.runId}")
     protected int runId;
 
@@ -125,8 +131,14 @@ public class AbstractExtractionThread implements ExtractionService {
             }
 
             String startingHeight = (lastBlock == null) ? String.valueOf(firstBlockHeight) : String.valueOf(lastBlock.getHeight());
-            logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
-            logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
+
+            if(continuous){
+                logger.info("Analysis starts at " + startingHeight);
+                logger.info("Continuous mode - ON. Fork prevention sleep buffer: " + sleep + " minutes");
+            }else {
+                logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
+                logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
+            }
 
             int blockHeight;
             boolean finished = false;
@@ -150,7 +162,17 @@ public class AbstractExtractionThread implements ExtractionService {
                 // check if end of chain has been reached
                 if (currentBlockHeight - blockHeight < blockQuerySize) {
                     blockQuerySize = currentBlockHeight - blockHeight;
-                    finished = true;
+
+                    if(continuous){
+                        logger.info("Extracted all recent blocks. Sleeping for " + sleep + " minutes...");
+                        Thread.sleep(sleep * 60000);
+                    }else{
+                        finished = true;
+                    }
+                }
+
+                if(continuous){
+                    // TODO: check if fork happened - if yes, mark pruned blocks and persist correct chain
                 }
 
                 // start http request performance meter

@@ -11,3 +11,7 @@ spring:
 
 chain:
   safetyBuffer: false # if activated - adds a safety buffer to avoid extracting pruned blocks
+
+exec:
+  continuous: false # if true - will run continuously. Will sleep for SLEEP minutes before extracting next blocks to avoid forks
+  sleep: 120 # defined how long the application shall sleep before checking for new blocks
