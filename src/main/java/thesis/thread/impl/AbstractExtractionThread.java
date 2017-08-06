@@ -138,7 +138,8 @@ public class AbstractExtractionThread implements ExtractionService {
                 logger.info("Continuous mode - ON. Fork prevention sleep buffer: " + sleep + " minutes");
             }else {
                 logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
-                logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
+                if(safetyBuffer)
+                    logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
             }
 
             int blockHeight;
