@@ -65,6 +65,9 @@ public class AbstractExtractionThread implements ExtractionService {
     @Value("${chain.newRun}")
     protected boolean newRun;
 
+    @Value("${chain.safetyBuffer}")
+    protected boolean safetyBuffer;
+
     @Value("${chain.runId}")
     protected int runId;
 
@@ -239,7 +242,9 @@ public class AbstractExtractionThread implements ExtractionService {
 
             currentBlockHeight = extractCurrentBlockHeight();
 
-            currentBlockHeight = currentBlockHeight - BLOCK_SAFETY_BUFFER;
+            if(safetyBuffer) {
+                currentBlockHeight = currentBlockHeight - BLOCK_SAFETY_BUFFER;
+            }
         }
 
     }
