@@ -9,6 +9,8 @@ import thesis.model.Block;
 import thesis.repository.BlockRepository;
 import thesis.service.BlockService;
 
+import java.util.List;
+
 @Service
 public class BlockServiceImpl implements BlockService {
 
@@ -49,6 +51,14 @@ public class BlockServiceImpl implements BlockService {
     @Transactional
     public Block readLastBlock(){
         return repository.findByMaxHeight();
+    }
+
+    @Override
+    public List<Block> readBlocksSinceHeight(int height) {
+        if(height > 0){
+            height = height-1;
+        }
+        return repository.findByHeightGreaterThan(height);
     }
 
 }
