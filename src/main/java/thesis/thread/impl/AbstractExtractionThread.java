@@ -68,6 +68,12 @@ public class AbstractExtractionThread implements ExtractionService {
     @Value("${chain.safetyBuffer}")
     protected boolean safetyBuffer;
 
+    @Value("${exec.continuous}")
+    protected boolean continuous;
+
+    @Value("${exec.sleep}")
+    protected int sleep;
+
     @Value("${chain.runId}")
     protected int runId;
 
@@ -81,7 +87,8 @@ public class AbstractExtractionThread implements ExtractionService {
     protected int currentBlockHeight;
     protected String operationMessage;
     protected Metainfo metainfo;
-
+    protected int lastExtractedHeight;
+    protected String lastExtractedHash;
 
     protected static final MetricRegistry metricRegistry = new MetricRegistry();
     protected Timer blockRequestTimer = metricRegistry.timer("block-requests:");
@@ -125,8 +132,14 @@ public class AbstractExtractionThread implements ExtractionService {
             }
 
             String startingHeight = (lastBlock == null) ? String.valueOf(firstBlockHeight) : String.valueOf(lastBlock.getHeight());
-            logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
-            logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
+
+            if(continuous){
+                logger.info("Analysis starts at " + startingHeight);
+                logger.info("Continuous mode - ON. Fork prevention sleep buffer: " + sleep + " minutes");
+            }else {
+                logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
+                logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
+            }
 
             int blockHeight;
             boolean finished = false;
@@ -134,7 +147,7 @@ public class AbstractExtractionThread implements ExtractionService {
 
             if (lastBlock == null) {
                 if (!newRun) throw new ServiceException("No previous data found. Please configure to start a new run");
-                blockhash = genesisBlock;
+                blockhash = firstBlockHash;
                 blockHeight = firstBlockHeight;
             } else {
                 blockHeight = lastBlock.getHeight();
@@ -150,6 +163,7 @@ public class AbstractExtractionThread implements ExtractionService {
                 // check if end of chain has been reached
                 if (currentBlockHeight - blockHeight < blockQuerySize) {
                     blockQuerySize = currentBlockHeight - blockHeight;
+                    lastExtractedHeight = currentBlockHeight;
                     finished = true;
                 }
 
@@ -168,9 +182,22 @@ public class AbstractExtractionThread implements ExtractionService {
 
                 blockhash = blockhashes.get(blockhashes.size() - 1).getHash();
                 blockHeight += blockQuerySize;
+                lastExtractedHash = blockhash;
 
                 double percent = (double) Math.round((blockHeight / (double) currentBlockHeight * 100) * 100) / 100;
                 logger.info("Block " + blockHeight + " - " + percent + "%");
+
+                if(finished && continuous){
+                    logger.info("Extracted all recent blocks. Sleeping for " + sleep + " minutes...");
+                    finished = false;
+                    Thread.sleep(sleep * 60000);
+                    // TODO: check if fork happened - if yes, mark pruned blocks and persist correct chain
+
+                    // Check if new run necessary. If yes, check validity of last extracted blocks
+                    if(checkForNewBlocks()){
+                        prepareNextRunAndCheckForks();
+                    }
+                }
 
             }
             logger.info("Finished operation... terminating");
@@ -188,6 +215,32 @@ public class AbstractExtractionThread implements ExtractionService {
             finalizeAndReport();
         }
 
+    }
+
+    /**
+     * Checks if new blocks have been found since last extraction.
+     * @return - true if new blocks have been found, otherwise false
+     * @throws ServiceException
+     */
+    private boolean checkForNewBlocks() throws ServiceException {
+        currentBlockHeight = extractCurrentBlockHeight();
+        return currentBlockHeight > lastExtractedHeight;
+    }
+
+    /**
+     * Checks if new extraction is necessary.
+     * Also checks if forks have happened
+     * @return
+     * @throws ServiceException
+     */
+    protected void prepareNextRunAndCheckForks() throws ServiceException {
+
+        List<BlockDto> lastBlockHashes = retrieveBlockHashes(blockQuerySize, lastExtractedHash, lastExtractedHeight);
+        List<Block> lastSavedBlocks = blockService.readBlocksSinceHeight(lastExtractedHeight);
+
+        for(int i = 0; i < lastBlockHashes.size(); i++){
+            // TODO: check if hashes match
+        }
     }
 
     /**
