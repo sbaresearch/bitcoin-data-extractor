@@ -187,6 +187,7 @@ public class AbstractExtractionThread implements ExtractionService {
                 double percent = (double) Math.round((blockHeight / (double) currentBlockHeight * 100) * 100) / 100;
                 logger.info("Block " + blockHeight + " - " + percent + "%");
 
+                /**
                 if(finished && continuous){
                     logger.info("Extracted all recent blocks. Sleeping for " + sleep + " minutes...");
                     finished = false;
@@ -198,6 +199,7 @@ public class AbstractExtractionThread implements ExtractionService {
                         prepareNextRunAndCheckForks();
                     }
                 }
+                 */
 
             }
             logger.info("Finished operation... terminating");
