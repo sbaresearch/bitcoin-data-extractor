@@ -114,9 +114,14 @@ public class AbstractExtractionThread implements ExtractionService {
             // Start performance reporting
             startPerformanceReporting();
 
-            Block lastBlock = blockService.readLastBlock();
+            Block lastBlock = null;
 
-            String startingHeight = (lastBlock == null) ? " 0 " : String.valueOf(lastBlock.getHeight());
+            // Read last block if not new run
+            if(!newRun) {
+                lastBlock = blockService.readLastBlock();
+            }
+
+            String startingHeight = (lastBlock == null) ? String.valueOf(firstBlockHeight) : String.valueOf(lastBlock.getHeight());
             logger.info("Analysis starts at " + startingHeight + " and will stop at block " + currentBlockHeight);
             logger.info("Safety Buffer: " + BLOCK_SAFETY_BUFFER + " blocks. Actual blockheight is " + (currentBlockHeight + BLOCK_SAFETY_BUFFER));
 
