@@ -22,10 +22,7 @@ public class BlockServiceImpl implements BlockService {
     @Transactional
     public Block create(Block toCreate) throws ServiceException {
         //
-        if(toCreate.getTime() <= 1497830400)
-            return repository.save(toCreate);
-        else
-            return toCreate;
+        return repository.save(toCreate);
     }
 
     @Override
@@ -49,14 +46,14 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     @Transactional
-    public Block readLastBlock(){
+    public Block readLastBlock() {
         return repository.findByMaxHeight();
     }
 
     @Override
     public List<Block> readBlocksSinceHeight(int height) {
-        if(height > 0){
-            height = height-1;
+        if (height > 0) {
+            height = height - 1;
         }
         return repository.findByHeightGreaterThan(height);
     }
