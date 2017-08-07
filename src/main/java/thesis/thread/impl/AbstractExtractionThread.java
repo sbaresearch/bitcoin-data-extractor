@@ -157,7 +157,6 @@ public class AbstractExtractionThread implements ExtractionService {
 
             logger.info("Retrieving blockhashes");
 
-            boolean first = true;
 
             while (!finished) {
 
@@ -172,6 +171,7 @@ public class AbstractExtractionThread implements ExtractionService {
                 final Timer.Context hashcontext = hashRequestTimer.time();
 
                 List<BlockDto> blockhashes = retrieveBlockHashes(blockQuerySize, blockhash, blockHeight);
+
 
                 // stop http request performance meter
                 hashcontext.stop();

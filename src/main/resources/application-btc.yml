@@ -2,7 +2,7 @@ spring:
   freemarker:
     checkTemplateLocation: false
   datasource:
-    url: jdbc:postgresql://localhost:5433/bitcoinabc
+    url: jdbc:postgresql://localhost:5432/btcanalyzer
     username: btc
     password: 4928a569e90bd3fc11b7dcc342d86ce6df67ddf56cb50581721f3b425941aded
   jpa:
@@ -19,12 +19,12 @@ spring:
       ordered_updates: true
 
 chain:
-  firstBlockHash: 0000000000000000010019a6930efa3dc3f0ae71990a39b4701a54448c042354
-  firstBlockHeight: 478550
+  firstBlockHash: 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+  firstBlockHeight: 0
   genesisBlock: 000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
   blockQuerySize: 1000
   testRun: false
-  newRun: true
+  newRun: false
   runId: 5
   lightRun: true
   hexheaders: false

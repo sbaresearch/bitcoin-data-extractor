@@ -15,6 +15,7 @@ public class VinDto implements Dto {
     @JsonProperty("vout")
     private int referenced_vout;
 
+    @JsonIgnore
     private ScriptSigDto scriptSig;
 
     private BigDecimal value;
@@ -45,10 +46,12 @@ public class VinDto implements Dto {
         this.referenced_vout = referenced_vout;
     }
 
+    @JsonIgnore
     public ScriptSigDto getScriptSig() {
         return scriptSig;
     }
 
+    @JsonIgnore
     public void setScriptSig(ScriptSigDto scriptSig) {
         this.scriptSig = scriptSig;
     }
