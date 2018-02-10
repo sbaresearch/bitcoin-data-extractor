@@ -1,4 +1,4 @@
-# Blockchain Data Miner
+# Bitcoin Data Miner
 
 A tool for extracting data from Bitcoin-like blockchains into a relational model. 
 
