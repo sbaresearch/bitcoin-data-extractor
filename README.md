@@ -1,9 +1,8 @@
 # Blockchain Data Miner
 
 A tool for extracting data from Bitcoin-like blockchains into a relational model. 
-Developed as part of the MSc Thesis <a target=__blank href="http://repositum.tuwien.ac.at/obvutwhs/download/pdf/2315652"> _"Merged Mining: Analyss of Effects and Implications"_</a> and the ESORICS CBT'17 paper <a target=__blank href="https://eprint.iacr.org/2017/791.pdf" >_"Merged Mining: Curse or Cure?"_</a>
 
-Makes use of the REST and/or RPC API provided by the Bitcoinc client (or forks).
+Developed as part of the MSc Thesis <a target=__blank href="http://repositum.tuwien.ac.at/obvutwhs/download/pdf/2315652"> _"Merged Mining: Analysis of Effects and Implications"_</a> and the ESORICS CBT'17 paper <a target=__blank href="https://eprint.iacr.org/2017/791.pdf" >_"Merged Mining: Curse or Cure?"_</a>
 
 Supported cryptocurrencies:
 + Bitcoin
@@ -23,7 +22,8 @@ Theoretically also possible:
 
 + Maven > 3.3.9
 + Java 1.8
-+ A running client of the blockchain you want to extract data from (e.g. Bitcoin)
++ A running client of the blockchain you want to extract data from (e.g. Bitcoin), as the tool makes use of the REST and/or RPC API provided by the clients.
+
 
 ## Usage
 
