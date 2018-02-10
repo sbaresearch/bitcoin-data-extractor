@@ -2,6 +2,22 @@
 
 A tool for extracting data from Bitcoin-like blockchains into a relational model. 
 
+Makes use of the REST and/or RPC API provided by the Bitcoinc client (or forks).
+
+Supported cryptocurrencies:
++ Bitcoin
++ Namecoin
++ Litecoin
++ Dogecoin
++ Myriadcoin
+
+Theoretically also possible:
++ Viacoin
++ Emercoin
++ Unitus
++ Zcash (limited)
++ ... in principle all Bitcoin-derivatives
+
 ## Requirements:
 
 + Maven > 3.3.9
@@ -28,6 +44,7 @@ Currently supported profiles:
 + Namecoin - ```nmc```
 + Litecoin - ```ltc```
 + Dogecoin - ```doge```
++ Myriadcoin - ```myriad```
 
 Configuration is possible through .yml files:
 + *spring.datasource*: database information
