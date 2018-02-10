@@ -1,6 +1,7 @@
 # Blockchain Data Miner
 
 A tool for extracting data from Bitcoin-like blockchains into a relational model. 
+Developed as part of the MSc Thesis <a target=__blank href="http://repositum.tuwien.ac.at/obvutwhs/download/pdf/2315652"> _"Merged Mining: Analyss of Effects and Implications"_</a> and the ESORICS CBT'17 paper <a target=__blank href="https://eprint.iacr.org/2017/791.pdf" >_"Merged Mining: Curse or Cure?"_</a>
 
 Makes use of the REST and/or RPC API provided by the Bitcoinc client (or forks).
 
