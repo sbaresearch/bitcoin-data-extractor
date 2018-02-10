@@ -41,7 +41,7 @@ Configuration is possible through .yml files:
  + *testRun*: true|false - a test run will simply try to extract the first 10 blocks of the chain
  + *runId*: [DEPRECATED] -1 to continue last run, or specify specific run to resume it 
  + *newRun*: true|false - determines whether this is a new run, or an update of an existing database
- + *lightRun*: false|false - Enable/Disable extraction of ALL transactions. Attention: extracting all transactions will lead to a very large database size (~ 3-4 times the size of the original blockchain)
+ + *lightRun*: false|false - Enable/Disable extraction of ALL transactions. **Attention: extracting all transactions will lead to significant database sizes (~ 3-4 times the size of the original blockchain)**
  + *extractNames*: true|false - only used in Namecoin. Activates extraction of Namecoin names
 
 + *email*: allows to configure email notifications on termination (success / error)
@@ -55,7 +55,7 @@ Requirements:
 + Oracle Virtual Box 5.x (or Parallels on Mac)
 + Vagrant
 
-After intalling the necessary software, run ```vagrant up``` in ther server folder. 
+After installing the necessary software, run ```vagrant up``` in ther server folder. 
 
 As a result, a VM with a PostrgeSQL 9.3 database server running on standard port 5432 will be provisioned. 
 You can access the VM by calling ```vagrant ssh``` in the server folder. 
