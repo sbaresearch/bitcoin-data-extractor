@@ -4,7 +4,16 @@ A tool for extracting data from Bitcoin-like blockchains into a relational model
 
 Developed as part of the MSc Thesis <a target=__blank href="http://repositum.tuwien.ac.at/obvutwhs/download/pdf/2315652"> _"Merged Mining: Analysis of Effects and Implications"_</a> and the ESORICS CBT'17 paper <a target=__blank href="https://eprint.iacr.org/2017/791.pdf" >_"Merged Mining: Curse or Cure?"_</a>
 
-Supported cryptocurrencies:
+## Content
+* [Supported cryptocurrencies](#supported-cryptocurrencies)
+* [Requirements](#requirements)
+* [Usage](#usage)
+  * [Configuration](#configuration)
+  * [Developer Mode with Vagrant](#developer-mode-with-vagrant)
+* [Outlook and Future Work](#outlook-and-future-work)
+* [Contact](#contact) 
+
+## Supported cryptocurrencies:
 + Bitcoin
 + Namecoin
 + Litecoin
@@ -38,7 +47,7 @@ Termination will happen automatically after sucessfull extraction or in case of 
 
 An email notification can be sent to your email address, if your server provides a mail server (see [configuration](#configuration))
 
-## Configuration
+### Configuration
 Currently supported profiles: 
 
 + Bitcoin - ```btc```
@@ -67,7 +76,7 @@ Configuration is possible through .yml files:
 + *jsonrpc*: configuration of the JSON-RPC API of the blockchain client. Not all clients provide a full REST API, so some data may need to be extracted using the old api.
 + *logging*: configuration of log-levels and logfiles
 
-## Developer Mode with Vagrant
+### Developer Mode with Vagrant
 For testing purposes a Vagrant VM build script is provided in the ```server``` folder. 
 Requirements: 
 + Oracle Virtual Box 5.x (or Parallels on Mac)
