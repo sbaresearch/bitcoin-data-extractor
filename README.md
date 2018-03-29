@@ -67,7 +67,7 @@ Configuration is possible through .yml files:
 + *jsonrpc*: configuration of the JSON-RPC API of the blockchain client. Not all clients provide a full REST API, so some data may need to be extracted using the old api.
 + *logging*: configuration of log-levels and logfiles
 
-## Vagrant
+## Developer Mode with Vagrant
 For testing purposes a Vagrant VM build script is provided in the ```server``` folder. 
 Requirements: 
 + Oracle Virtual Box 5.x (or Parallels on Mac)
@@ -83,4 +83,19 @@ For database configurations (*necessary!!!*) please check the the bootstrap.sh f
 
 Destory the VM - ```vagrant destroy```
 Shutdonw VM - ```vagrant halt```
+
+## Outlook and Future Work
+This tool was developed as a research prototype and, while built according to best practices, is still far from perfect. 
+Open todos include:
+* Refactor code, specifically configuration file functionality
+* Split into two packages: reference-client interfacing service and relational conversion/persistance service
+* Implement continuous sync. mode (incl. fork mitigation/tracking)
+* Add REST API to serve data to external services
+* Add User interface
+
+This software will be further improved and extended as part of the "Blockchain Data Analytics and Health Monitoring" project at IC3RE (Imperial College Centre for Cryptocurrency Research and Engineering) in cooperation with SBA Research. 
+
+## Contact
+Alexei Zamyatin - a.zamyatin@imprial.ac.uk
+
 
